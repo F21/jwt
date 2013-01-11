@@ -1,9 +1,9 @@
 {
-    "name": "F21/JWT",
+    "name": "f21/jwt",
     "type": "library",
     "description": "JWT (JSON Web Tokens) for PHP",
     "keywords": ["jwt", "json web tokens"],
-    "homepage": "https://github.com/F21/JWT",
+    "homepage": "https://github.com/F21/jwt",
     "license": "MIT",
     "authors": [
         {
@@ -17,7 +17,7 @@
     },
     "autoload": {
         "psr-0": {
-            "JWT": ""
+            "jwt": ""
         }
     }
 }
