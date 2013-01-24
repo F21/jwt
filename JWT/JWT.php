@@ -69,6 +69,15 @@ class JWT{
 			
 			case 'RS256':
 				return (boolean)openssl_verify($input, $signature, $key, OPENSSL_ALGO_SHA256);
+			
+			case 'RS384':
+				return (boolean)openssl_verify($input, $signature, $key, OPENSSL_ALGO_SHA384);
+			
+			case 'RS512':
+				return (boolean)openssl_verify($input, $signature, $key, OPENSSL_ALGO_SHA512);
+				
+			default:
+				throw new Exception("Unsupported or invalid signing algorithm.");
 		}
 	}
 	
@@ -84,9 +93,21 @@ class JWT{
 				
 			case 'HS512':
 				return hash_hmac('sha512', $input, $key, true);
-				
+			
 			case 'RS256':
-				if (!openssl_sign($input, $signature, $key, OPENSSL_ALGO_SHA256)) {
+				
+				$algo = OPENSSL_ALGO_SHA256;
+				//Fall through
+				
+			case 'RS384':
+				$algo = OPENSSL_ALGO_SHA384;
+				//Fall through
+				
+			case 'RS512':
+				
+				$algo = OPENSSL_ALGO_SHA512;
+				
+				if (!openssl_sign($input, $signature, $key, $algo)) {
      				throw new Exception("Unable to sign data.");
     			}
     			
