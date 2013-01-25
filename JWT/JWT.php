@@ -95,27 +95,26 @@ class JWT{
 				return hash_hmac('sha512', $input, $key, true);
 			
 			case 'RS256':
-				
-				$algo = OPENSSL_ALGO_SHA256;
-				//Fall through
+				return $this->generateRSASignature($input, $key, OPENSSL_ALGO_SHA256);
 				
 			case 'RS384':
-				$algo = OPENSSL_ALGO_SHA384;
-				//Fall through
+				return $this->generateRSASignature($input, $key, OPENSSL_ALGO_SHA384);
 				
 			case 'RS512':
-				
-				$algo = OPENSSL_ALGO_SHA512;
-				
-				if (!openssl_sign($input, $signature, $key, $algo)) {
-     				throw new Exception("Unable to sign data.");
-    			}
-    			
-    			return $signature;
-    			
+				return $this->generateRSASignature($input, $key, OPENSSL_ALGO_SHA512);
+
 			default:
 				throw new Exception("Unsupported or invalid signing algorithm.");
 		}
+	}
+	
+	private function generateRSASignature($input, $key, $algo){
+		
+		if (!openssl_sign($input, $signature, $key, $algo)) {
+			throw new Exception("Unable to sign data.");
+		}
+		
+		return $signature;
 	}
 	
 	private static function urlSafeB64Encode($data){
