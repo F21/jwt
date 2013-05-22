@@ -1,8 +1,8 @@
 <?php
 /**
  * Implements JWT encoding and decoding as per http://tools.ietf.org/html/draft-ietf-oauth-json-web-token-06
- * Encoding alogrithm based on http://code.google.com/p/google-api-php-client
- * Decoding alogithm based on https://github.com/luciferous/jwt
+ * Encoding algorithm based on http://code.google.com/p/google-api-php-client
+ * Decoding algorithm based on https://github.com/luciferous/jwt
  * @author Francis Chuang <francis.chuang@gmail.com>
  */
 
