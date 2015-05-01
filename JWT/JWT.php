@@ -25,7 +25,7 @@ class JWT
         return implode('.', $segments);
     }
 
-    public static function decode($jwt, $key = null, $verify = true)
+    public static function decode($jwt, $key = null, $algo = null)
     {
         $tks = explode('.', $jwt);
 
@@ -45,12 +45,13 @@ class JWT
 
         $sig = JWT::urlsafeB64Decode($cryptob64);
 
-        if ($verify) {
+        if (isset($key)) {
+
             if (empty($header->alg)) {
                 throw new DomainException('Empty algorithm');
             }
 
-            if (!JWT::verifySignature($sig, "$headb64.$payloadb64", $key, $header->alg)) {
+            if (!JWT::verifySignature($sig, "$headb64.$payloadb64", $key, $algo)) {
                 throw new UnexpectedValueException('Signature verification failed');
             }
         }
@@ -58,7 +59,7 @@ class JWT
         return $payload;
     }
 
-    private static function verifySignature($signature, $input, $key, $algo = 'HS256')
+    private static function verifySignature($signature, $input, $key, $algo)
     {
         switch ($algo) {
             case'HS256':
@@ -80,7 +81,7 @@ class JWT
         }
     }
 
-    private static function sign($input, $key, $algo = 'HS256')
+    private static function sign($input, $key, $algo)
     {
         switch ($algo) {
 
