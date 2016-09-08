@@ -51,6 +51,10 @@ class JWT
                 throw new DomainException('Empty algorithm');
             }
 
+            if (is_null($algo)) {
+                $algo = $header->alg;
+            }
+
             if (!JWT::verifySignature($sig, "$headb64.$payloadb64", $key, $algo)) {
                 throw new UnexpectedValueException('Signature verification failed');
             }
