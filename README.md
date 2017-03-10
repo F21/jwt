@@ -2,6 +2,9 @@ JWT
 ===
 A PHP library for encoding and decoding JSON Web Tokens.
 
+**Deprecration Notice**
+This project is no longer being actively maintained. Please consider switching to [lcobucci/jwt](https://github.com/lcobucci/jwt) or one of the PHP libraries listed on [jwt.io](https://jwt.io/#libraries-io).
+
 **Important security notice**
 
 Thanks to Toshiharu Sugiyama!
